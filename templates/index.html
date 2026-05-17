@@ -3,102 +3,163 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>BankNotes Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML App for Detecting BankNotes From Fraud</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-
-        body{
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background-color: #f2f2f2;
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #06b6d4);
             font-family: Arial, sans-serif;
         }
 
-        .container{
+        .app-card {
+            max-width: 900px;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+        }
+
+        .left-panel {
+            background: linear-gradient(160deg, #111827, #1e40af);
+            color: white;
+            padding: 40px;
+        }
+
+        .right-panel {
             background: white;
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
 
-            width: 350px;
+        .brand-badge {
+            background: #22c55e;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 18px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .btn-predict {
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 12px;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .btn-predict:hover {
+            background: #15803d;
+            color: white;
+        }
+
+        .prediction-box {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 16px;
+            background: #ecfdf5;
+            color: #065f46;
+            font-weight: bold;
             text-align: center;
         }
 
-        input{
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 20px;
-
-            border-radius: 8px;
-            border: 1px solid gray;
-
-            font-size: 16px;
+        .footer-name {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 30px;
         }
-
-        button{
-            background-color: green;
-            color: white;
-
-            border: none;
-            padding: 12px 20px;
-
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover{
-            background-color: darkgreen;
-        }
-
-        .prediction{
-            margin-top: 25px;
-            color: #222;
-        }
-
     </style>
-
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container d-flex align-items-center justify-content-center min-vh-100 py-5">
 
-        <h1>BankNote Authentication</h1>
+    <div class="row app-card w-100">
 
-        <form action="/predict_ui" method="post">
+        <div class="col-md-5 left-panel">
+            <span class="brand-badge">Machine Learning Deployment</span>
 
-            <label>VARIANCE</label>
-            <input type="number" step="any" name="variance" required>
+            <h1 class="fw-bold mb-3">ML App for Detecting BankNotes From Fraud</h1>
 
-            <label>SKEWNESS</label>
-            <input type="number" step="any" name="skewness" required>
+            <p class="lead">
+                This app uses a trained machine learning model to predict whether a banknote is original or fake.
+            </p>
 
-            <label>CURTOSIS</label>
-            <input type="number" step="any" name="curtosis" required>
+            <hr>
 
-            <label>ENTROPY</label>
-            <input type="number" step="any" name="entropy" required>
+            <h5>How to use this app?</h5>
+            <p>
+                Enter the four numerical features extracted from a banknote image:
+            </p>
 
-            <button type="submit">PREDICT</button>
+            <ul>
+                <li><strong>Variance</strong>: spread of image pixel values</li>
+                <li><strong>Skewness</strong>: asymmetry of the image data</li>
+                <li><strong>Curtosis</strong>: shape/sharpness of the distribution</li>
+                <li><strong>Entropy</strong>: randomness or noise in the image</li>
+            </ul>
 
-        </form>
+            <p>
+                After entering the values, click <strong>Predict</strong>.
+            </p>
 
-        {% if prediction %}
-            <div class="prediction">
-                <h2>{{ prediction }}</h2>
+            <div class="footer-name">
+                Built by <strong>RAVI GIRAMONI</strong>
             </div>
-        {% endif %}
+        </div>
+
+        <div class="col-md-7 right-panel">
+
+            <h2 class="fw-bold text-center mb-4">BankNote Authentication</h2>
+
+            <form action="/predict_ui" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Variance</label>
+                    <input type="number" step="any" name="variance" class="form-control" placeholder="Example: 3.6216" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Skewness</label>
+                    <input type="number" step="any" name="skewness" class="form-control" placeholder="Example: 8.6661" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Curtosis</label>
+                    <input type="number" step="any" name="curtosis" class="form-control" placeholder="Example: -2.8073" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Entropy</label>
+                    <input type="number" step="any" name="entropy" class="form-control" placeholder="Example: -0.44699" required>
+                </div>
+
+                <button type="submit" class="btn btn-predict">Predict BankNote</button>
+
+            </form>
+
+            {% if prediction %}
+                <div class="prediction-box">
+                    Prediction Result: {{ prediction }}
+                </div>
+            {% endif %}
+
+        </div>
 
     </div>
 
-</body>
+</div>
 
+</body>
 </html>
