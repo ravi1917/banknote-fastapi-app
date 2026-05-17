@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BankNotes Prediction</title>
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        .container{
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+
+            width: 350px;
+            text-align: center;
+        }
+
+        input{
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+
+            border-radius: 8px;
+            border: 1px solid gray;
+
+            font-size: 16px;
+        }
+
+        button{
+            background-color: green;
+            color: white;
+
+            border: none;
+            padding: 12px 20px;
+
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover{
+            background-color: darkgreen;
+        }
+
+        .prediction{
+            margin-top: 25px;
+            color: #222;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>BankNote Authentication</h1>
+
+        <form action="/predict_ui" method="post">
+
+            <label>VARIANCE</label>
+            <input type="number" step="any" name="variance" required>
+
+            <label>SKEWNESS</label>
+            <input type="number" step="any" name="skewness" required>
+
+            <label>CURTOSIS</label>
+            <input type="number" step="any" name="curtosis" required>
+
+            <label>ENTROPY</label>
+            <input type="number" step="any" name="entropy" required>
+
+            <button type="submit">PREDICT</button>
+
+        </form>
+
+        {% if prediction %}
+            <div class="prediction">
+                <h2>{{ prediction }}</h2>
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
